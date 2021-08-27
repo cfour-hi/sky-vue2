@@ -6,9 +6,10 @@ interface Position {
 }
 
 interface RegisterMoveablePanelOptions {
-  onmousedown?(position: Position): void;
-  onmousemove?(position: Position): void;
-  onmouseup?(position: Position): void;
+  wrapEl?: HTMLElement;
+  onmousedown?(position: Position, event: MouseEvent): void;
+  onmousemove?(position: Position, event: MouseEvent): void;
+  onmouseup?(position: Position, event: MouseEvent): void;
 }
 
 export const registerMoveableElement = (
@@ -35,16 +36,16 @@ export const registerMoveableElement = (
     update(event);
 
     if (onmousemove) {
-      onmousemove(position);
+      onmousemove(position, event);
     }
   };
 
-  const _onmouseup = () => {
+  const _onmouseup = (event: MouseEvent) => {
     document.removeEventListener('mousemove', _onmousemove);
     document.removeEventListener('mouseup', _onmouseup);
 
     if (onmouseup) {
-      onmouseup(position);
+      onmouseup(position, event);
     }
   };
 
@@ -58,7 +59,7 @@ export const registerMoveableElement = (
     document.addEventListener('mouseup', _onmouseup);
 
     if (onmousedown) {
-      onmousedown(position);
+      onmousedown(position, event);
     }
   };
 

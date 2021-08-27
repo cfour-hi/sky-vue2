@@ -106,8 +106,12 @@
         </SkyButton>
       </div>
 
-      <div class="bar bar__color">
-        <BarColorPicker :value="proxyCloud.color" @input="handleChangeColor" />
+      <div class="bar bar__color" data-sky-popup>
+        <BarColorPicker
+          :value="proxyCloud.color"
+          :modes="['纯色']"
+          @input="handleChangeColor"
+        />
       </div>
 
       <div class="bar bar-tool" data-sky-popup>

@@ -44,16 +44,30 @@ export default {
     };
   },
 
+  watch: {
+    value(value) {
+      this.doChange(value);
+    },
+  },
+
   mounted() {
-    this.preActiveTabVN = this.$slots.default.find(
-      vn => vn.componentInstance.label === this.value,
-    );
-    this.preActiveTabVN?.componentInstance?.changeActive?.(true);
+    this.doChange(this.value);
   },
 
   methods: {
+    doChange(value) {
+      const index = this.$slots.default.findIndex(
+        vn => vn.componentOptions.propsData.label === value,
+      );
+      this.sliderStyle.left = `${this.tabWidth * index}%`;
+
+      this.preActiveTabVN = this.$slots.default[index];
+      this.preActiveTabVN?.componentInstance?.changeActive?.(true);
+    },
+
     handleClickTabTitle(tab, index) {
       this.$emit('input', tab.componentOptions.propsData.label);
+      this.$emit('change', tab.componentOptions.propsData.label);
 
       this.sliderStyle.left = `${this.tabWidth * index}%`;
 

@@ -19,32 +19,37 @@ export default {
   },
 
   mounted() {
-    let mousedown = false;
+    this.onMousedownEl4PopupMixin = event => {
+      event.stopPropagation();
+    };
+    this.$el.addEventListener('mousedown', this.onMousedownEl4PopupMixin);
 
-    this.onMousedown4PopupMixin = () => (mousedown = true);
+    this.onClickEl4PopupMixin = event => {
+      event.stopPropagation();
+    };
+    this.$el.addEventListener('click', this.onClickEl4PopupMixin);
 
-    this.onMouseup4PopupMixin = () => {
-      if (mousedown) {
-        mousedown = false;
-        return;
-      }
+    let visibleOnMousedownDoc = false;
 
-      if (this.visible) {
-        // 使用 setTimeout 保证 close 在 click 之后执行
-        // 其它 DOM 可能绑定了 click 事件切换 popup 的 显示/隐藏 状态
-        setTimeout(() => {
-          this.$emit('update:visible', false);
-          this.$emit('close');
-        });
+    this.onMousedownDoc4PopupMixin = () => {
+      visibleOnMousedownDoc = this.visible;
+    };
+
+    this.onClickDoc4PopupMixin = () => {
+      if (visibleOnMousedownDoc) {
+        this.$emit('update:visible', false);
+        this.$emit('close');
       }
     };
 
-    this.$el.addEventListener('mousedown', this.onMousedown4PopupMixin);
-    document.addEventListener('mouseup', this.onMouseup4PopupMixin);
+    document.addEventListener('mousedown', this.onMousedownDoc4PopupMixin);
+    document.addEventListener('click', this.onClickDoc4PopupMixin);
   },
 
   destroyed() {
-    this.$el.removeEventListener('mousedown', this.onMousedown4PopupMixin);
-    document.removeEventListener('mouseup', this.onMouseup4PopupMixin);
+    this.$el.removeEventListener('click', this.onClickEl4PopupMixin);
+    this.$el.removeEventListener('mousedown', this.onMousedownEl4PopupMixin);
+    document.removeEventListener('mousedown', this.onMousedownDoc4PopupMixin);
+    document.removeEventListener('click', this.onClickDoc4PopupMixin);
   },
 };

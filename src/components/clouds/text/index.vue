@@ -58,7 +58,7 @@ const toStyle = styles => {
       ', Arial, SimSun, Sans-Serif',
     fontSize: styles.fontSize ? `${styles.fontSize}px` : '',
     textAlign: styles.textAlign ?? '',
-    color: styles.color ? `rgba(${styles.color.join(',')})` : '',
+    color: styles.color,
     textDecoration: styles.textDecoration ?? '',
     writingMode: styles.writingMode ?? '',
     fontWeight: styles.fontWeight ?? '',

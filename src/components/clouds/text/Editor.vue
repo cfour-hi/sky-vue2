@@ -42,7 +42,7 @@ const toStyle = styles => {
     fontStyle: styles.fontStyle ?? '',
     textDecoration: styles.textDecoration,
     textAlign: styles.textAlign ?? '',
-    color: styles.color ? `rgba(${styles.color.join(',')})` : '',
+    color: styles.color,
     writingMode: styles.writingMode ?? '',
     lineHeight: styles.lineHeight ?? '',
     letterSpacing: `${styles.letterSpacing}px`,

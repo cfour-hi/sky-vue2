@@ -4,7 +4,7 @@ import SkyInput from './SkyInput.vue';
 import SkyInputNumber from './SkyInputNumber.vue';
 import SkySelect from './SkySelect.vue';
 import SkyOption from './SkyOption.vue';
-import SkyColorPicker from './SkyColorPicker.vue';
+import SkyColorPicker from './sky-color-picker/index.vue';
 import SkyPopup from './SkyPopup.vue';
 import SkyTabs from './SkyTabs.vue';
 import SkyTabPanel from './SkyTabPanel.vue';

@@ -1,9 +1,3 @@
 # Sky
 
-- PSD 解析
-- PSD 还原
-- 图层编辑
-
-## 📝 License
-
-This project is [Apache 2.0](https://github.com/daybrush/moveable/blob/master/LICENSE) licensed.
+- [技术文档](https://www.yuque.com/books/share/69a2c66e-16b9-4597-8fa0-ef25a164ee4d)

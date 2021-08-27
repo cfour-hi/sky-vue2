@@ -24,9 +24,13 @@
         <span>画布背景</span>
       </div>
 
-      <SkyTabs v-model="activeTab" class="bg-tabs">
+      <SkyTabs v-model="activeTab" class="bg-tabs" data-sky-popup>
         <SkyTabPanel class="bar bar__color" label="颜色">
-          <BarColorPicker v-model="skyState.background.color" />
+          <BarColorPicker
+            v-model="background"
+            default-color="#ffffffff"
+            :modes="['纯色', '渐变']"
+          />
         </SkyTabPanel>
 
         <SkyTabPanel label="图片">
@@ -67,6 +71,15 @@ export default {
 
     height() {
       return `${parseInt(this.skyState.height / this.skyState.scale)}px`;
+    },
+
+    background: {
+      get() {
+        return this.skyState.background.value;
+      },
+      set(value) {
+        this.skyState.background.value = value;
+      },
     },
   },
 };

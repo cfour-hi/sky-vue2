@@ -44,13 +44,8 @@ export default {
 
   computed: {
     backgroundStyle() {
-      const backgroundColor = this.background.color
-        ? `rgba(${this.background.color.join(',')})`
-        : '';
-
       return {
-        backgroundColor,
-        backgroundImage: `url(${this.background.image})`,
+        background: this.background.value,
         opacity: this.background.opacity ?? 1,
       };
     },

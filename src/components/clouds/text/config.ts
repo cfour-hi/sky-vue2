@@ -10,7 +10,7 @@ export interface CloudTextPrivate {
   fontFamily: string[];
   fontSize: number;
   textAlign: string;
-  color: number[];
+  color: string;
   textDecoration: string;
   writingMode: string;
   fontWeight: string | number;
@@ -31,7 +31,7 @@ export const addTextCloud = (props = {}) => {
     fontFamily: ['SourceHanSansSC-Regular'],
     fontSize: 60,
     textAlign: 'left',
-    color: [0, 0, 0, 1],
+    color: `#000000ff`,
     textDecoration: 'none',
     writingMode: '',
     fontWeight: 400,

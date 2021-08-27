@@ -1,12 +1,11 @@
 <template>
   <div
     class="bar__color-picker"
-    data-sky-popup
     @click="showSkyColorPicker = !showSkyColorPicker"
   >
     <div
       class="relative h-6 rounded cursor-pointer"
-      :style="{ background: color }"
+      :style="{ background: $attrs.value }"
     >
       <div v-if="multiple" class="multiple-mask flex-center">
         多种颜色
@@ -14,6 +13,7 @@
     </div>
 
     <SkyColorPicker
+      ref="skyColorPicker"
       :visible.sync="showSkyColorPicker"
       v-bind="$attrs"
       v-on="$listeners"
@@ -24,6 +24,8 @@
 <script>
 export default {
   name: 'BarColorPicker',
+
+  inheritAttrs: false,
 
   props: {
     multiple: {
@@ -36,12 +38,6 @@ export default {
     return {
       showSkyColorPicker: false,
     };
-  },
-
-  computed: {
-    color() {
-      return `rgba(${this.$attrs.value.join(',')})`;
-    },
   },
 };
 </script>

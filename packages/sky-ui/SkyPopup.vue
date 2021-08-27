@@ -1,5 +1,5 @@
 <template>
-  <div v-show="visible" class="sky-popup" :style="rootStyle" @click.stop>
+  <div v-show="visible" class="sky-popup" :style="rootStyle">
     <slot />
   </div>
 </template>

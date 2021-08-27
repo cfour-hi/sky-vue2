@@ -9,6 +9,4 @@ import './plugins/use-sky-editor';
 
 Vue.config.productionTip = false;
 
-(window as any).SkyAppVM = new Vue({
-  render: h => h(App),
-}).$mount('#app');
+(window as any).SkyAppVM = new Vue({ render: h => h(App) }).$mount('#app');

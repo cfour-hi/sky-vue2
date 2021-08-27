@@ -262,30 +262,26 @@ export default function createCloud(sky: Sky) {
   };
 
   module.lock = () => {
-    (sky.moveable.instance.target as HTMLElement[]).forEach(targetEl => {
-      const cloud = sky.state.clouds.find(
-        cloud => cloud.id === targetEl.dataset.cloudId,
-      );
-      if (!cloud) return;
+    if (sky.state.targetClouds.length === 0) return;
 
-      cloud.lock = !cloud.lock;
+    sky.state.targetClouds.forEach(cloud => {
+      cloud.lock = true;
     });
     sky.moveable.updateState();
   };
 
   module.unlock = () => {
-    (sky.moveable.instance.target as HTMLElement[]).forEach(targetEl => {
-      const cloud = sky.state.clouds.find(
-        cloud => cloud.id === targetEl.dataset.cloudId,
-      );
-      if (!cloud) return;
+    if (sky.state.targetClouds.length === 0) return;
 
-      cloud.lock = !cloud.lock;
+    sky.state.targetClouds.forEach(cloud => {
+      cloud.lock = false;
     });
     sky.moveable.updateState();
   };
 
   module.delete = ({ force = false } = {}) => {
+    if (sky.state.targetClouds.length === 0) return;
+
     const [targetCloud0] = sky.state.targetClouds;
     if (targetCloud0.lock && !force) return;
 

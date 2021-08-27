@@ -17,8 +17,7 @@ export interface CreateSkyOptions {
 }
 
 export interface BackgroundState {
-  image: string;
-  color: number[];
+  value: string;
   opacity: number;
 }
 
@@ -54,8 +53,7 @@ const createState = (module: Sky) => {
       height: 800,
       scale: 1,
       background: {
-        image: '',
-        color: [255, 255, 255, 1],
+        value: '#ffffffff',
         opacity: 1,
       },
       clouds: [],

@@ -1,13 +1,22 @@
 export const RGB2Hex = (r: number, g: number, b: number) => {
-  let _r = r.toString(16);
-  let _g = g.toString(16);
-  let _b = b.toString(16);
+  let _r = Math.round(r).toString(16);
+  let _g = Math.round(g).toString(16);
+  let _b = Math.round(b).toString(16);
 
   if (_r.length === 1) _r = '0' + _r;
   if (_g.length === 1) _g = '0' + _g;
   if (_b.length === 1) _b = '0' + _b;
 
   return '#' + _r + _g + _b;
+};
+
+export const RGBA2HexA = (r: number, g: number, b: number, a = 1) => {
+  const hex = RGB2Hex(r, g, b);
+
+  let _a = Math.round((a as number) * 255).toString(16);
+  if (_a.length === 1) _a = '0' + _a;
+
+  return hex + _a;
 };
 
 export const RGB2HSL = (r: number, g: number, b: number) => {
@@ -83,7 +92,14 @@ export const HSL2Hex = (h: number, s: number, l: number) => {
   return RGB2Hex(r, g, b);
 };
 
+export const HSLA2HexA = (h: number, s: number, l: number, a = 1) => {
+  const hex = HSL2Hex(h, s, l);
+  return `${hex}${Math.round(a * 255).toString(16)}`;
+};
+
 export const hex2RGB = (hex: string) => {
+  hex = hex.slice(0, 7);
+
   let r = 0;
   let g = 0;
   let b = 0;
@@ -101,4 +117,20 @@ export const hex2RGB = (hex: string) => {
   }
 
   return [r, g, b];
+};
+
+export const hexA2RGBA = (hexA: string) => {
+  const rgb = hex2RGB(hexA);
+  const a = +('0x' + hexA[7] + hexA[8]);
+  return [...rgb, +(a / 255).toFixed(2)];
+};
+
+export const hex2HSL = (hex: string) => {
+  const [r, g, b] = hex2RGB(hex);
+  return RGB2HSL(r, g, b);
+};
+
+export const hexA2HSLA = (hexA: string) => {
+  const [r, g, b, a] = hexA2RGBA(hexA);
+  return RGBA2HSLA(r, g, b, a);
 };
