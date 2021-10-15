@@ -94,7 +94,7 @@ export const HSL2Hex = (h: number, s: number, l: number) => {
 
 export const HSLA2HexA = (h: number, s: number, l: number, a = 1) => {
   const hex = HSL2Hex(h, s, l);
-  return `${hex}${Math.round(a * 255).toString(16)}`;
+  return `${hex}${a === 0 ? '00' : Math.round(a * 255).toString(16)}`;
 };
 
 export const hex2RGB = (hex: string) => {

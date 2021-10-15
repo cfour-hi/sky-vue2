@@ -14,6 +14,7 @@ import AsideCategory from '@/components/layout/AsideCategory.vue';
 import AppMain from '@/components/layout/AppMain.vue';
 import EditorContextmenu from '@/components/biz/EditorContextmenu.vue';
 import useFont from '@/composables/useFont';
+import { nextTick, onMounted } from '@vue/composition-api';
 
 export default {
   name: 'App',
@@ -26,8 +27,11 @@ export default {
   },
 
   setup() {
-    const { initFonts } = useFont();
-    initFonts();
+    onMounted(async () => {
+      await nextTick();
+      const { initFonts } = useFont();
+      initFonts();
+    });
   },
 };
 </script>

@@ -32,5 +32,14 @@ module.exports = {
       .use('svgo-loader')
       .loader('svgo-loader')
       .end();
+
+    config.module
+      .rule('css')
+      .oneOf('normal')
+      .uses.delete('vue-style-loader')
+      .end()
+      .use('wrap-vue-style-loader')
+      .before('css-loader')
+      .loader(path.resolve('loaders/wrap-vue-style-loader.js'));
   },
 };

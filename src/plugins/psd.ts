@@ -1,10 +1,8 @@
-import b64toBlob, { splitB64 } from '../utils/b64-to-blob';
 import { CLOUD_TYPE } from '../constants';
-
-const PSD = window.require('psd');
+import { RGBA2HexA } from '@packages/sky-ui/color';
 
 export async function parsePSDFromURL(url: string) {
-  return await PSD.fromURL(url);
+  return await (window as any).PSD.fromURL(url);
 }
 
 function toRGBAColor(data: number[]) {
@@ -71,13 +69,13 @@ function toCloudTextConfig(data: any, layer: any) {
   let point = 0;
   const texts = StyleRun.RunArray.map((text: any, index: number) => {
     const length = StyleRun.RunLengthArray[index];
-    const props: { text: string; fontSize: number; color?: number[] } = {
+    const props: { text: string; fontSize: number; color?: string } = {
       text: data.text.value.substr(point, length),
       fontSize: text.StyleSheet.StyleSheetData.FontSize,
     };
     const { FillColor } = text.StyleSheet.StyleSheetData;
     if (FillColor) {
-      props.color = toRGBAColor1(FillColor.Values);
+      props.color = RGBA2HexA(...toRGBAColor1(FillColor.Values));
     }
     point += length;
     return props;
@@ -131,7 +129,7 @@ function toCloudTextConfig(data: any, layer: any) {
       .fonts()
       .map((font: string) => font.slice(1).replace('\u0000', '')),
     fontSize: data.text.font.sizes[0],
-    color: toRGBAColor(data.text.font.colors[0]),
+    color: RGBA2HexA(...toRGBAColor(data.text.font.colors[0])),
     textDecoration: StyleRun.RunArray[0].StyleSheet.StyleSheetData.Underline
       ? 'underline'
       : '',
@@ -150,11 +148,11 @@ function toCloudTextConfig(data: any, layer: any) {
 }
 
 function toCloudImageConfig(data: any, layer: any) {
-  const { type, b64 } = splitB64(layer.image.toBase64());
-  const src = URL.createObjectURL(b64toBlob(b64, type));
+  // const { type, b64 } = splitB64(layer.image.toBase64());
+  // const src = URL.createObjectURL(b64toBlob(b64, type));
 
   return {
-    src,
+    src: layer.image.toBase64(),
     type: CLOUD_TYPE.image,
     width: data.width,
     height: data.height,
@@ -191,7 +189,7 @@ export async function convertPSD2Sky(psd: any) {
   console.info('children, document', psd, children, doc);
 
   const background = {
-    color: [255, 255, 255, 0],
+    color: '#ffffff00',
     image: '',
     opacity: 1,
   };

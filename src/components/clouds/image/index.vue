@@ -18,16 +18,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.cloud__image {
-  height: 100%;
-}
-
-.image__content {
-  display: block;
-  width: 100%;
-  height: 100%;
-  -webkit-user-drag: none;
-}
-</style>

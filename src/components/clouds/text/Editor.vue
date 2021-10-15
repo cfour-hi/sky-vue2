@@ -5,7 +5,8 @@
     @click="handleClick"
     @mouseup="onMouseup"
   >
-    <Slate :value="value" class="slate" @onChange="handleChange">
+    <CloudText :cloud="cloud" />
+    <!-- <Slate :value="value" class="slate" @onChange="handleChange">
       <Editable
         ref="slateEditor"
         class="slate-editable"
@@ -13,13 +14,14 @@
         :render-element="renderElement"
         :read-only="readonly"
       ></Editable>
-    </Slate>
+    </Slate> -->
   </div>
 </template>
 
 <script>
 import { Transforms } from 'slate';
-import { Slate, Editable } from 'slate-vue';
+import CloudText from './index.vue';
+// import { Slate, Editable } from 'slate-vue';
 
 // TODO: 组件在 clouds 进入编辑状态，不可触发拖动行为
 
@@ -32,53 +34,54 @@ const toRenderDirections = mode => {
   return [...RENDER_DIRECTIONS_BASE, 'w', 'e'];
 };
 
-const toStyle = styles => {
-  return {
-    fontFamily:
-      (styles.fontFamily ? styles.fontFamily.join(',') : '') +
-      ', Arial, SimSun, Sans-Serif',
-    fontSize: styles.fontSize ? `${styles.fontSize}px` : '',
-    fontWeight: styles.fontWeight,
-    fontStyle: styles.fontStyle ?? '',
-    textDecoration: styles.textDecoration,
-    textAlign: styles.textAlign ?? '',
-    color: styles.color,
-    writingMode: styles.writingMode ?? '',
-    lineHeight: styles.lineHeight ?? '',
-    letterSpacing: `${styles.letterSpacing}px`,
-  };
-};
+// const toStyle = styles => {
+//   return {
+//     fontFamily:
+//       (styles.fontFamily ? styles.fontFamily.join(',') : '') +
+//       ', Arial, SimSun, Sans-Serif',
+//     fontSize: styles.fontSize ? `${styles.fontSize}px` : '',
+//     fontWeight: styles.fontWeight,
+//     fontStyle: styles.fontStyle ?? '',
+//     textDecoration: styles.textDecoration,
+//     textAlign: styles.textAlign ?? '',
+//     color: styles.color,
+//     writingMode: styles.writingMode ?? '',
+//     lineHeight: styles.lineHeight ?? '',
+//     letterSpacing: `${styles.letterSpacing}px`,
+//   };
+// };
 
-const renderLeaf = ({ attributes, children, leaf }) => {
-  // console.log('renderLeaf', attributes, children, leaf);
+// const renderLeaf = ({ attributes, children, leaf }) => {
+//   // console.log('renderLeaf', attributes, children, leaf);
 
-  return {
-    render() {
-      return (
-        <span {...{ attrs: attributes }} style={toStyle(leaf)}>
-          {children}
-        </span>
-      );
-    },
-  };
-};
+//   return {
+//     render() {
+//       return (
+//         <span {...{ attrs: attributes }} style={toStyle(leaf)}>
+//           {children}
+//         </span>
+//       );
+//     },
+//   };
+// };
 
-const renderElement = ({ attributes, children }) => {
-  // console.log('renderElement', attributes, children, element);
+// const renderElement = ({ attributes, children }) => {
+//   // console.log('renderElement', attributes, children, element);
 
-  return {
-    render() {
-      return <p {...{ attrs: attributes }}>{children}</p>;
-    },
-  };
-};
+//   return {
+//     render() {
+//       return <p {...{ attrs: attributes }}>{children}</p>;
+//     },
+//   };
+// };
 
 export default {
   name: 'CloudTextEditor',
 
   components: {
-    Slate,
-    Editable,
+    CloudText,
+    // Slate,
+    // Editable,
   },
 
   props: {
@@ -108,8 +111,8 @@ export default {
     };
 
     return {
-      renderLeaf,
-      renderElement,
+      // renderLeaf,
+      // renderElement,
       readonly: true,
       value: JSON.stringify(this.cloud.texts),
     };
@@ -118,7 +121,7 @@ export default {
   computed: {
     rootStyle() {
       return {
-        ...toStyle(this.cloud),
+        // ...toStyle(this.cloud),
         width: `${this.cloud.width / this.skyState.scale}px`,
         height: `${this.cloud.height / this.skyState.scale}px`,
         transform: `scale(${this.skyState.scale})`,
@@ -196,7 +199,7 @@ export default {
 
     onChangeTarget() {
       this.readonly = true;
-      Transforms.collapse(this.$editor, { edge: 'focus' });
+      // Transforms.collapse(this.$editor, { edge: 'focus' });
       this.cloud.text = this.$el.textContent;
     },
 

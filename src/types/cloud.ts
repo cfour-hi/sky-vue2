@@ -1,5 +1,5 @@
 import { Cloud } from '@packages/sky/editor/plugins/cloud';
 
-interface CloudText extends Cloud {
+export interface CloudText extends Cloud {
   fontFamily: any[];
 }

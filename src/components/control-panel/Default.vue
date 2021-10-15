@@ -75,10 +75,10 @@ export default {
 
     background: {
       get() {
-        return this.skyState.background.value;
+        return this.skyState.background.color;
       },
       set(value) {
-        this.skyState.background.value = value;
+        this.skyState.background.color = value;
       },
     },
   },

@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.5",
+    "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "mousetrap": "^1.6.5",
     "moveable": "0.24.6",
+    "normalize.css": "^8.0.1",
     "selecto": "^1.11.1",
     "slate-vue": "^0.2.0",
     "vue": "^2.6.12"
@@ -37,6 +39,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.12.1",
     "lint-staged": "^9.5.0",
+    "loader-utils": "^2.0.0",
     "postcss": "^7",
     "prettier": "^1.19.1",
     "sass": "^1.26.5",

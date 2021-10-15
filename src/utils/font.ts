@@ -32,9 +32,3 @@ export const isSupportFontFamily = (f: string) => {
   };
   return g(h).join('') !== g(f).join('');
 };
-
-export const downloadFont = async (name: string, url: string) => {
-  const ff = new FontFace(name, `url(${url})`);
-  const f = await ff.load();
-  document.fonts.add(f);
-};

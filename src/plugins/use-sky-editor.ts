@@ -6,7 +6,7 @@ import ControlPanelContainer from '../components/control-panel/Container.vue';
 import initMousetrap from './mousetrap';
 import { CLOUD_TYPE } from '../constants';
 
-export const skyEditor = createSkyEditor();
+const skyEditor = createSkyEditor();
 
 Vue.use(skyEditor, {
   initMousetrap,
@@ -17,3 +17,5 @@ Vue.use(skyEditor, {
   },
   selectoContainer: '.app-main',
 });
+
+export default skyEditor;

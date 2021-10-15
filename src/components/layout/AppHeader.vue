@@ -11,6 +11,7 @@
     <SkyButton @click="handleSave">Save</SkyButton>
     <SkyButton @click="handleAdaptive">Adaptive</SkyButton>
     <SkyButton @click="handleAddText">Add Text</SkyButton>
+    <SkyButton @click="handleGenerateImage">Generate Image</SkyButton>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import { processPSD2Sky } from '@/plugins/psd';
 import { loadLocalTemplateData, saveTemplate2Local } from '@/plugins/template';
 import { adaptiveZoom } from '@/utils/zoom';
 import { addTextCloud } from '@/components/clouds/text/config';
+import dom2Svg, { svg2ImageBlob } from '@/plugins/generate-image';
 
 export default {
   async mounted() {
@@ -91,6 +93,21 @@ export default {
 
     handleAddText() {
       addTextCloud();
+    },
+
+    async handleGenerateImage() {
+      console.time('handleGenerateImage');
+
+      const svg = dom2Svg(this.skyState);
+      const blob = await svg2ImageBlob(svg);
+
+      console.timeEnd('handleGenerateImage');
+
+      // downloadBlob(blob);
+
+      const blobURL = URL.createObjectURL(blob);
+      window.open(blobURL);
+      URL.revokeObjectURL(blobURL);
     },
   },
 };

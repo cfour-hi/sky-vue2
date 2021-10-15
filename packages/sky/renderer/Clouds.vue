@@ -67,9 +67,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.sky-clouds {
-  position: absolute;
-}
-</style>

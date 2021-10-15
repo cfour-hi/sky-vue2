@@ -7,13 +7,7 @@
 </template>
 
 <script>
-import useFont from '@/composables/useFont';
-import {
-  defineComponent,
-  onMounted,
-  nextTick,
-  computed,
-} from '@vue/composition-api';
+import { defineComponent, computed } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'AppMain',
@@ -26,12 +20,6 @@ export default defineComponent({
         width: `${root.skyState.width}px`,
         height: `${root.skyState.height}px`,
       };
-    });
-
-    onMounted(async () => {
-      await nextTick();
-      const { downloadNonLocalFont } = useFont();
-      downloadNonLocalFont(root.skyState.clouds);
     });
 
     return {

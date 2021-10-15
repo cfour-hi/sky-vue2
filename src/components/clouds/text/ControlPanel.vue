@@ -146,8 +146,9 @@ import ControlPanelHeader from '@/components/control-panel/Header.vue';
 import { toProxyCloud } from './helper';
 import BarColorPicker from '@/components/biz/BarColorPicker.vue';
 import PopupSpacing from './control-panel/PopupSpacing.vue';
-import { isSupportFontFamily, downloadFont } from '@/utils/font';
+import { isSupportFontFamily } from '@/utils/font';
 import useFont from '@/composables/useFont';
+import { addFont2Style } from '@/composables/useFont';
 
 window.EditorEditor = Editor;
 window.RangeRange = Range;
@@ -260,7 +261,7 @@ export default {
 
       if (isSupportFontFamily(value)) return;
 
-      downloadFont(font.name, font.content.woff);
+      addFont2Style(font.name, font.content.woff);
     },
 
     handleChangeColor(value) {

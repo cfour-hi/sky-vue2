@@ -1,11 +1,11 @@
-import './root.css';
+import 'animate.css';
+import '@/root.css';
 import '@/plugins/use-plugin';
-
 import Vue from 'vue';
 import App from './App.vue';
 
-import './tailwindcss/tailwind.css';
-import './plugins/use-sky-editor';
+import '@/tailwindcss/tailwind.css';
+import '@/plugins/use-sky-editor';
 
 Vue.config.productionTip = false;
 

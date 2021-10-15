@@ -33,7 +33,7 @@ export default {
 
     defaultColor: {
       type: String,
-      default: '#000000ff',
+      default: '#ffffffff',
     },
 
     defaultGradient: {
@@ -72,6 +72,9 @@ export default {
     ['$attrs.value']: {
       immediate: true,
       handler(value) {
+        if (!value) {
+          return;
+        }
         this.mode = parseBackgroundValue(value);
         this.handleInput(value);
       },

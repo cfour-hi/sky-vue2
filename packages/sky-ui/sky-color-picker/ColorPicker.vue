@@ -112,6 +112,7 @@ export default {
     value: {
       type: String,
       required: true,
+      default: '#ffffff00',
     },
 
     modes: {

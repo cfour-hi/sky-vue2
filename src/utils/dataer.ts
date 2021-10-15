@@ -4,7 +4,7 @@ export function splitB64(b64Data: string) {
   return { type, b64 };
 }
 
-export default function b64toBlob(
+export default function b64ToBlob(
   b64Data: string,
   contentType = '',
   sliceSize = 512,
@@ -26,4 +26,15 @@ export default function b64toBlob(
 
   const blob = new Blob(byteArrays, { type: contentType });
   return blob;
+}
+
+export async function blob2B64(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      resolve(fileReader.result as string);
+    };
+    fileReader.onerror = reject;
+    fileReader.readAsDataURL(blob);
+  });
 }

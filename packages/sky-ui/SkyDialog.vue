@@ -1,10 +1,19 @@
 <template>
   <div class="sky-dialog flex-center" :style="rootStyle">
-    <div class="mask" @click="handleClickDialog"></div>
+    <div class="mask" @click="handleClickMask"></div>
 
     <div class="sky-dialog__panel" :style="panelStyle">
-      <div class="sky-dialog__header"></div>
-      <div class="sky-dialog__body"></div>
+      <div class="sky-dialog__header">
+        <slot name="header" />
+      </div>
+
+      <div class="sky-dialog__body">
+        <slot />
+      </div>
+
+      <div class="sky-dialog__footer">
+        <slot name="footer" />
+      </div>
     </div>
   </div>
 </template>
@@ -17,21 +26,6 @@ export default {
     visible: {
       type: Boolean,
       default: false,
-    },
-
-    width: {
-      type: [Number, String],
-      default: '80%',
-    },
-
-    height: {
-      type: [Number, String],
-      default: '80%',
-    },
-
-    destroyOnClose: {
-      type: Boolean,
-      default: true,
     },
   },
 
@@ -50,21 +44,8 @@ export default {
     },
   },
 
-  watch: {
-    visible(value) {
-      if (value) {
-        document.body.appendChild(this.$el);
-      }
-    },
-  },
-
-  mounted() {
-    // console.log('this', this);
-    document.body.appendChild(this.$el);
-  },
-
   methods: {
-    handleClickDialog() {
+    handleClickMask() {
       this.$emit('update:visible', false);
     },
   },
@@ -73,15 +54,27 @@ export default {
 
 <style lang="scss" scoped>
 .sky-dialog {
-  z-index: 3001;
+  z-index: 3002;
   @apply fixed top-0 right-0 bottom-0 left-0;
 
   &__panel {
-    @apply rounded-lg bg-white;
+    @apply relative flex flex-col w-4/5 h-4/5 rounded-lg bg-white;
+  }
+
+  &__header {
+    @apply flex-none h-14;
+  }
+
+  &__body {
+    @apply flex-1 overflow-auto;
+  }
+
+  &__footer {
+    @apply flex-none h-14;
   }
 }
 
 .mask {
-  @apply absolute w-full h-full bg-opacity-60;
+  @apply absolute w-full h-full bg-black bg-opacity-60;
 }
 </style>

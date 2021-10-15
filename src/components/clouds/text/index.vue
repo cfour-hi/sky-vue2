@@ -1,5 +1,5 @@
 <template>
-  <div class="text-index" :style="rootStyle">
+  <div class="cloud-text" :style="rootStyle">
     <div class="text__effect">
       <div
         v-for="(stroke, index) in cloud.strokes"
@@ -116,19 +116,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.text-index {
-  word-wrap: break-word;
-}
-
-.text__effect {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.text__content {
-  position: absolute; /* 用来提升 DOM 层级 + 获取内容真实宽高 */
-}
-</style>
